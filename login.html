@@ -2,7 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>برايز | تسجيل الدخول</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -133,6 +134,24 @@ body{
   color:#fff;
   cursor:pointer;
 }
+
+/* منع تحديد النصوص في كل الصفحة */
+body, div, span, p, h1, h2, h3, h4, h5, h6, button, img {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* السماح بالتحديد والكتابة داخل حقول الإدخال فقط */
+input, textarea {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+
 </style>
 </head>
 
@@ -161,7 +180,14 @@ body{
         <img src="https://flagcdn.com/w20/eg.png">
         +20
       </div>
-      <input type="tel" id="phone" placeholder="1XXXXXXXXX">
+<input
+  type="tel"
+  id="phone"
+  placeholder="1XXXXXXXXX"
+  inputmode="numeric"
+  pattern="[0-9]*"
+  maxlength="10"
+/>
     </div>
 
     <button class="login-btn" id="loginBtn">
@@ -200,6 +226,10 @@ btn.addEventListener('click',()=>{
 if(localStorage.getItem("loggedIn") === "true"){
   window.location.href = "home.html";
 }
+
+phone.addEventListener('input', () => {
+  phone.value = phone.value.replace(/\D/g, '');
+});
 
 </script>
 
